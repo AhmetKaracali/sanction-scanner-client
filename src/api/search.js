@@ -17,15 +17,21 @@ module.exports = (baseURL, username, password) => {
         searchByIdentity: (id) =>
             httpClient.get(`/api/Search/SearchByIdentity?id=${id}`),
 
-        // 3. SearchByDocument
-        // With this method, searches can be performed by filling in information from an official document, such as
+        // 3. searchByIdDocumentNumber
+        // With this method, searches can be performed by filling in information from an official ID document, such as
         // a passport or ID, into the required fields.
-        searchByDocumentNumber: (documentNumber) =>
-            httpClient.post(`/api/Search/SearchByDocumentNumber?documentNumber=${documentNumber}`),
+        searchByIdDocumentNumber: (documentNumber,entityType =0) =>
+            httpClient.get(`/api/Search/SearchByDocumentNumber?documentNumber=${documentNumber}&searchType=1&entityType=${entityType}`),
 
-        // 4. SearchByPassport
+        // 4. searchByPassportDocumentNumber
+        // With this method, searches can be performed by filling in information from an official Passport document, such as
+        // a passport or ID, into the required fields.
+        searchByPassportDocumentNumber: (documentNumber) =>
+            httpClient.get(`/api/Search/SearchByDocumentNumber?documentNumber=${documentNumber}&searchType=2`),
+
+        // 5. SearchByPassport
         // This method allows you to search for real persons using their passport numbers.
         searchByPassportNo: (passportNo) =>
-            httpClient.post(`/api/Search/SearchByPassportNo?passportNo=${passportNo}`),
+            httpClient.get(`/api/Search/SearchByPassportNo?passportNo=${passportNo}`),
     };
 };
